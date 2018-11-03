@@ -4,26 +4,12 @@
   height: 95%;
 }
 
-/* .icon {
-  height: 100px;
-  width: 10px;
-}  */
-
-/* .country-item {
-  height: 50px;
-  width: 50px;
-} */ 
-
 .country-item {
   box-shadow: 2px 2px 4px 0 #ccc;
   box-sizing: border-box;
   display: inline-block;
   margin: 0 0 1.5em auto; 
   padding: 1em;
-  /* height: 100px;
-  width: 170px; */
-  /* width: 100%;
-  height: 100%; */
 }
 
 .country-item img {
