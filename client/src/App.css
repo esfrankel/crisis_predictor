@@ -1,32 +1,23 @@
 .app {
   margin: 20px auto;
   width: 90%;
+  height: 95%;
 }
 
-.icon {
-  height: 200px;
-  width: 260px;
-} 
-
-/* .country-item {
-  height: 50px;
-  width: 50px;
-} */ 
-
-.gif-item {
+.country-item {
   box-shadow: 2px 2px 4px 0 #ccc;
   box-sizing: border-box;
   display: inline-block;
-  margin: 0 0 1.5em;
+  margin: 0 0 1.5em auto; 
   padding: 1em;
-  width: 100%;
 }
 
-.gif-item img {
+.country-item img {
   width: 100%;
+  height: 100%;
 }
 
-.gif-list {
+.country-list {
   column-gap: 1.5em;
   font-size: .85em;
   margin: 1.5em 0;
@@ -35,7 +26,7 @@
 
 input {
   display: block;
-  font-size: 22px;
+  font-size: 30px;
   height: 50px;
   margin: 0 auto;
   text-align: center;
@@ -43,7 +34,7 @@ input {
 }
 
 @media only screen and (min-width: 400px) {
-  .gif-list {
+  .country-list {
       -moz-column-count: 2;
       -webkit-column-count: 2;
       column-count: 2;
@@ -51,7 +42,7 @@ input {
 }
 
 @media only screen and (min-width: 700px) {
-  .gif-list {
+  .country-list {
       -moz-column-count: 3;
       -webkit-column-count: 3;
       column-count: 3;
@@ -59,7 +50,7 @@ input {
 }
 
 @media only screen and (min-width: 900px) {
-  .gif-list {
+  .country-list {
       -moz-column-count: 4;
       -webkit-column-count: 4;
       column-count: 4;
@@ -67,7 +58,7 @@ input {
 }
 
 @media only screen and (min-width: 1100px) {
-  .gif-list {
+  .country-list {
       -moz-column-count: 5;
       -webkit-column-count: 5;
       column-count: 5;
