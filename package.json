@@ -1,0 +1,13 @@
+{
+  "name": "crisis-predictor",
+  "version": "1.0.0",
+  "description": "Crisis predictor with \"neural networks\"",
+  "main": "index.js",
+  "repository": "https://github.com/michellebao/crisis_predictor.git",
+  "author": "Michelle",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.1.1",
+    "superagent": "^4.0.0-beta.5"
+  }
+}
