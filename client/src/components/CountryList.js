@@ -4,15 +4,30 @@ import CountryItem from './CountryItem';
 class CountryList extends React.Component {
   constructor(props) {
     super(props);
-    this.countryItems = this.props.state.countries;
   }
-
   render() {
+    const countryItems = {};
+
+    for (var i = 0; i < this.props.state.countries.length; i++ ) {
+      var country = this.props.state.countries[i];
+
+
+      if (countryItems[country.Country]) {
+        if (country.Year > countryItems[country.Country].Year) {
+          countryItems[country.Country] = country;
+        }
+      }
+      else {
+        countryItems[country.Country] = country;
+      }
+    }
+    var renderedItems = Object.values(countryItems).map((country) => {
+      return <CountryItem key={country.Id} country={country}  onCountryChange={this.props.onCountryChange} onStateChange={this.props.onStateChange}/>
+    });
+
     return (
-      <div className="country-list">{this.countryItems.map((country) => {
-        return <CountryItem key={country.id} country={country} onCountryChange={this.props.onCountryChange} onStateChange={this.props.onStateChange}/>})}
-      </div>
-    )
+      <div className="country-list">{renderedItems}</div>
+    );
   }
 }
 export default CountryList;

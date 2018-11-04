@@ -4,8 +4,6 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 class CountryModal extends React.Component {
   constructor(props) {
     super(props);
-
-
     this.toggle = this.toggle.bind(this);
   }
 
