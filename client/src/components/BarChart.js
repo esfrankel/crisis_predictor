@@ -22,7 +22,7 @@ class BarChart extends React.Component{
 render() {
 
  var data = {
-      labels: ["Overall Score", "Structural", "Economic", "Current Events", "Sentiment Analysis"],
+      labels: ["Overall", "Structural", "Economic", "Events", "Sentiment"],
       datasets: [{
           label: 'Value (scaled to 1)',
           data: this.state.dataSet,
@@ -58,8 +58,8 @@ render() {
     return(
       <Bar
     data={data}
-    width={10}
-    height={5}
+    width={20}
+    height={10}
     options={{
         maintainAspectRatio: true, offsetWidth:0
     }}
