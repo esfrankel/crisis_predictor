@@ -20,7 +20,7 @@ with open('ucdp-brd-conf-181.csv') as csv_file:
             else:
                 conflicts[(no_space[0], row[2])] = conflicts[(no_space[0], row[2])] + int(row[12])
 
-print conflicts
+print(conflicts)
 data = []
 deaths = []
 with open('stocks.csv') as csv_file:
@@ -60,5 +60,5 @@ for x in range(int(0.9*len(data)), len(data)):
 
 reg = LogisticRegression()
 reg.fit(training_data, training_deaths)
-print reg.score(testing_data, testing_deaths)
+print(reg.score(testing_data, testing_deaths))
 joblib.dump(reg, 'Logistic_Regression.joblib')

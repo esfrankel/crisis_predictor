@@ -9,7 +9,7 @@ wordDict = {}
 with open('conflict_words.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     for row in csv_reader:
-        print row
+        print(row)
         if len(row) == 0:
             continue
         word = row[0]
@@ -19,17 +19,18 @@ with open('conflict_words.csv') as csv_file:
             wordDict[word] = wordDict[word] + 1
 
 wordDict["XXXXX"] = 4
-keys = wordDict.keys()
-for key in keys:
+# keys = wordDict.keys()
+for key in list(wordDict):
     if wordDict[key] < 4:
         wordDict["XXXXX"] = wordDict["XXXXX"] + wordDict[key]
         del wordDict[key]
 
-print wordDict
-print wordDict.values()
 normalWordDict = {}
+print("test1")
 for key in wordDict.keys():
     normalWordDict[key] = 0
+
+print("test2")
 
 normalWordDict["XXXXX"] = 4
 output = []
@@ -46,9 +47,9 @@ with open('conflict_words_split.csv') as csv_file:
                 rowDict["XXXXX"] = rowDict["XXXXX"] + 1
 
         output.append(1)
-        features.append(rowDict.values())
+        features.append(list(rowDict.values()))
         count = count + 1
-print count
+print(count)
 
 with open('normal_words_split.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
@@ -61,7 +62,7 @@ with open('normal_words_split.csv') as csv_file:
                 rowDict["XXXXX"] = rowDict["XXXXX"] + 1
 
         output.append(0)
-        features.append(rowDict.values())
+        features.append(list(rowDict.values()))
 
 features, output = shuffle(features, output, random_state=0)
 training_data = []
@@ -71,12 +72,11 @@ testing_deaths = []
 for x in range(0, int(0.9*len(features))):
     training_data.append(features[x])
     training_deaths.append(output[x])
-
 for x in range(int(0.9*len(features)), len(features)):
     testing_data.append(features[x])
     testing_deaths.append(output[x])
 
-print len(features)
+print(testing_data)
 
 
 # with open('normal_words.csv') as csv_file:
@@ -93,5 +93,5 @@ print len(features)
 
 bay = bayes.MultinomialNB()
 bay.fit(training_data, training_deaths)
-val = bay.predict_proba(testing_data)
+print(bay.score(testing_data, testing_deaths)) 
 joblib.dump(bay, 'Naive_Bayes.joblib')

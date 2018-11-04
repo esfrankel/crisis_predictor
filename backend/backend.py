@@ -1,7 +1,8 @@
-from flask import Flask
+from flask import Flask, request
 from pymongo import MongoClient
 from sklearn.externals import joblib
 import csv
+import json
 app = Flask(__name__)
 
 wordDict = {}
@@ -18,8 +19,9 @@ with open('conflict_words.csv') as csv_file:
             wordDict[word] = wordDict[word] + 1
 
 wordDict["XXXXX"] = 4
-keys = wordDict.keys()
-for key in keys:
+# keys = wordDict.keys()
+# for key in keys:
+for key in list(wordDict):
     if wordDict[key] < 4:
         wordDict["XXXXX"] = wordDict["XXXXX"] + wordDict[key]
         del wordDict[key]
@@ -29,7 +31,12 @@ economic_classifier = joblib.load('Logistic_Regression.joblib')
 article_classifier = joblib.load('Naive_Bayes.joblib')
 
 @app.route("/")
-def get_data(country):
+def hello():
+    print("hello world")
+
+@app.route("/loc")
+def get_data():
+    country = request.args.get('country')
     client = MongoClient('mongodb://master:stanford1@ds041167.mlab.com:41167/crisis')
     database = client.crisis
     structural = database.structural.find_one({'country': country})
@@ -59,8 +66,6 @@ def get_data(country):
     economic_data = economic["data"]
     struc_prob = structural_classifier.predict_proba([structural_data])
     econ_prob = economic_classifier.predict_proba([economic_data])
-    print (struc_prob)
-    print (econ_prob)
 
     normalWordDict = {}
     for key in wordDict.keys():
@@ -78,13 +83,11 @@ def get_data(country):
             else:
                 rowDict["XXXXX"] = rowDict["XXXXX"] + 1
 
-        vals = rowDict.values()
+        vals = list(rowDict.values())
         prediction = article_classifier.predict([vals])
         if (prediction == 1):
             count = count + 1
 
-    print(float(count)/10)
-    print(tot_sentiment)
     overall = max(0, ((struc_prob[0][1] + econ_prob[0][1] + float(count)/10 + -1*tot_sentiment)/4))
     normal = overall*12/3
     final_values = []
@@ -93,4 +96,5 @@ def get_data(country):
     final_values.append(min(econ_prob[0][1]/normal, econ_prob[0][1]))
     final_values.append(min((float(count)/10)/normal, float(count)/10))
     final_values.append(max(0, min(-1*tot_sentiment/normal, -1*tot_sentiment)))
-    return final_values
+    return json.dumps(final_values)
+# print(get_data("Nigeria"))

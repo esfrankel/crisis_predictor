@@ -25,7 +25,7 @@ with open('ucdp-brd-conf-181.csv') as csv_file:
             else:
                 conflicts[(no_space[0], row[2])] = conflicts[(no_space[0], row[2])] + int(row[12])
 
-print conflicts
+print(conflicts)
 deaths = []
 data = []
 
@@ -75,7 +75,7 @@ with open('CIRI Data 1981_2011 2014.04.14.csv') as csv_file:
 
 data, deaths = shuffle(data, deaths, random_state=0)
 training_data = []
-print count
+print(count)
 training_deaths = []
 testing_data = []
 testing_deaths = []
@@ -92,14 +92,14 @@ neural_net.max_iter = 5000000
 neural_net.fit(training_data, training_deaths)
 result = neural_net.score(testing_data, testing_deaths)
 fs = neural_net.predict_proba(testing_data)
-print fs
-print "Neural Network Accuracy is " + str(result)
+print(fs)
+print("Neural Network Accuracy is " + str(result))
 
 forest = ens.RandomForestClassifier()
 forest.n_estimators = 100
 forest.fit(training_data, training_deaths)
 result = forest.score(testing_data, testing_deaths)
-print "Random Forest Accuracy is " + str(result)
+print("Random Forest Accuracy is " + str(result))
 
 # clf3 = SVC(gamma='scale', kernel='rbf', probability=True)
 # clf3.fit(training_data, training_deaths)
@@ -123,7 +123,7 @@ print "Random Forest Accuracy is " + str(result)
 
 vote = ens.VotingClassifier(estimators=[('mlp', neural_net), ('rfc', forest)], voting='soft', weights=[1,1])
 vote.fit(training_data, training_deaths)
-print vote.score(testing_data, testing_deaths)
+print(vote.score(testing_data, testing_deaths))
 
 
 joblib.dump(neural_net, 'Soft_Voting_Classifier.joblib')
