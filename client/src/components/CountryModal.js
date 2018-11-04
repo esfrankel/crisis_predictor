@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import BarChart from "./BarChart.js";
 
 class CountryModal extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class CountryModal extends React.Component {
       <div>
         <Modal isOpen={this.props.modalToggled} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>{this.props.countryToggled}</ModalHeader>
+          <BarChart state={this.props.state}/>
         </Modal>
       </div>
     );
