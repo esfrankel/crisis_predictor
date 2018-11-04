@@ -3,7 +3,31 @@ from pymongo import MongoClient
 from sklearn.externals import joblib
 import csv
 app = Flask(__name__)
-#
+
+wordDict = {}
+
+with open('conflict_words.csv') as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=',')
+    for row in csv_reader:
+        if len(row) == 0:
+            continue
+        word = row[0]
+        if word not in wordDict:
+            wordDict[word] = 1
+        else:
+            wordDict[word] = wordDict[word] + 1
+
+wordDict["XXXXX"] = 4
+keys = wordDict.keys()
+for key in keys:
+    if wordDict[key] < 4:
+        wordDict["XXXXX"] = wordDict["XXXXX"] + wordDict[key]
+        del wordDict[key]
+
+structural_classifier = joblib.load('Soft_Voting_Classifier.joblib')
+economic_classifier = joblib.load('Logistic_Regression.joblib')
+article_classifier = joblib.load('Naive_Bayes.joblib')
+
 @app.route("/")
 def get_data(country):
     client = MongoClient('mongodb://master:stanford1@ds041167.mlab.com:41167/crisis')
@@ -70,31 +94,3 @@ def get_data(country):
     final_values.append(min((float(count)/10)/normal, float(count)/10))
     final_values.append(max(0, min(-1*tot_sentiment/normal, -1*tot_sentiment)))
     return final_values
-
-
-wordDict = {}
-
-with open('conflict_words.csv') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',')
-    for row in csv_reader:
-        if len(row) == 0:
-            continue
-        word = row[0]
-        if word not in wordDict:
-            wordDict[word] = 1
-        else:
-            wordDict[word] = wordDict[word] + 1
-
-wordDict["XXXXX"] = 4
-keys = wordDict.keys()
-for key in keys:
-    if wordDict[key] < 4:
-        wordDict["XXXXX"] = wordDict["XXXXX"] + wordDict[key]
-        del wordDict[key]
-
-
-
-structural_classifier = joblib.load('Soft_Voting_Classifier.joblib')
-economic_classifier = joblib.load('Logistic_Regression.joblib')
-article_classifier = joblib.load('Naive_Bayes.joblib')
-get_data("Nigeria")
