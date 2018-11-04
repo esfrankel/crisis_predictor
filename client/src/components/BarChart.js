@@ -1,4 +1,4 @@
-import CVSParse from "../CSVParse.js"
+import CSVParse from "../CSVParse.js"
 import React from 'react';
 import {Bar} from 'react-chartjs-2';
 
@@ -13,6 +13,7 @@ class BarChart extends React.Component{
 
   componentDidMount() {
     const entry = this.props.state.countryToggled;
+    //this.props.state.countries.---
     fetch('http://127.0.0.1:5000/loc?country='+entry)
     .then(response => response.json())
     .then(data => this.setState({ dataSet: data }));
