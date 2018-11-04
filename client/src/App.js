@@ -22,11 +22,8 @@ class App extends React.Component {
       });
       }
 
-
-
-
   handleTermChange = (term) => {
-      const filtered = this.state.countries.filter((country) => country.name.includes(term.charAt(0).toUpperCase() + term.substr(1).toLowerCase()))
+      const filtered = this.state.countries.filter((country) => country.Country.includes(term.charAt(0).toUpperCase() + term.substr(1).toLowerCase()))
       console.log(term.charAt(0).toUpperCase() + term.substr(1).toLowerCase())
       this.setState({
           filtered: filtered
@@ -50,12 +47,12 @@ class App extends React.Component {
       <div className="app">
         <div className="app-header">
           <img src={logo} className="app-logo" alt = "logo" />
-          <h2 className="title"> Preflict</h2>
+          <h2 className="title"> conflict.io</h2>
           <h3 className="caption">A global risk assessment.</h3>
+          <SearchBar className="search" onTermChange={this.handleTermChange} />
         </div>
-        <SearchBar onTermChange={this.handleTermChange} />
         <CountryList state={this.state} onStateChange={this.handleModalToggle} onCountryChange={this.handleCountryChange}/>
-        <CountryModal modalToggled={this.state.modalToggled} countryToggled={this.state.countryToggled} onStateChange={this.handleModalToggle}/>
+        <CountryModal state={this.state} modalToggled={this.state.modalToggled} countryToggled={this.state.countryToggled} onStateChange={this.handleModalToggle}/>
       </div>
     );
   }
