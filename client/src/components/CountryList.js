@@ -8,8 +8,6 @@ const CountryList = (props) => {
 
   return (
     <div className="country-list">{countryItems}</div>
-
-    //<ul>{countryItems}</ul>
   );
 };
 
