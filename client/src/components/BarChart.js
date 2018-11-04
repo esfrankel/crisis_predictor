@@ -5,25 +5,27 @@ import {Bar} from 'react-chartjs-2';
 class BarChart extends React.Component{
   constructor(props) {
     super(props);
+
+    this.state = {
+      dataSet: null,
+    };
   }
+
+  componentDidMount() {
+    const entry = this.props.state.countryToggled;
+    fetch('http://127.0.0.1:5000/loc?country='+entry)
+    .then(response => response.json())
+    .then(data => this.setState({ dataSet: data }));
+    console.log(this.dataSet);
+  }
+
 render() {
-  const countryItems = {};
-  for (var i = 0; i < this.props.state.countries.length; i++ ) {
-    var country = this.props.state.countries[i];
-    if (countryItems[country.Country]) {
-      if (country.Year > countryItems[country.Country].Year) {
-        countryItems[country.Country] = country;
-      }
-    }
-    else {
-      countryItems[country.Country] = country;
-    }
-  }
+
  var data = {
-      labels: ["AvgDiffScore", "AvgDiffPe", "AvgDiffPb"],
+      labels: ["Overall Score", "Structural", "Economic", "Current Events", "Sentiment Analysis"],
       datasets: [{
           label: 'Value (scaled to 1)',
-          data: [country.AvgDiffScore, country.AvgDiffPe, country.AvgDiffPb],
+          data: this.state.dataSet,
           backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
               'rgba(54, 162, 235, 0.2)',
@@ -56,10 +58,10 @@ render() {
     return(
       <Bar
     data={data}
-    width={100}
-    height={50}
+    width={10}
+    height={5}
     options={{
-        maintainAspectRatio: false, offsetWidth:0
+        maintainAspectRatio: true, offsetWidth:0
     }}
 />
     )
