@@ -3,7 +3,7 @@
 
 
 //   export function parse(cb){
-      
+
 //     d3.csv("./src/stocks.csv", function(data) {
 //         cb(data);
 //     console.log(data[0]);
@@ -20,7 +20,7 @@ const allStocks = {
 }
 
 // export default function parse(fileName, cb){
-      
+
 //     d3.csv("./src/stocks.csv", function(data) {
 //         cb(data);
 //         console.log(data[0]);
@@ -31,7 +31,7 @@ export default function parse(fileName) {
 // d3.csv("./stocks.csv", function(d) {
 //     return {
 //       Country : d.Country,
-//       Year : +d.Year, 
+//       Year : +d.Year,
 //       AvgDiffScore : +d.AvgDiffScore,
 //       AvgDiffPe : +d.AvgDiffPe,
 //       AvgDiffPb : +d.AvgDiffPb
@@ -52,7 +52,7 @@ return d3.csv(allStocks[fileName]).then(function(data) {
             Country : d.Country,
             Alpha2 : code,
             Id : i++,
-            Year : +d.Year, 
+            Year : +d.Year,
             AvgDiffScore : +d.AvgDiffScore,
             AvgDiffPe : +d.AvgDiffPe,
             AvgDiffPb : +d.AvgDiffPb,
