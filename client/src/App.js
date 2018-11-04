@@ -48,7 +48,7 @@ class App extends React.Component {
       <div className="app">
         <div className="app-header">
           <img src={logo} className="app-logo" alt = "logo" />
-          <h2 className="title"> conflict.io</h2>
+          <h2 className="title"> peace.io</h2>
           <h3 className="caption">A global risk assessment.</h3>
           <SearchBar className="search" onTermChange={this.handleTermChange} />
         </div>

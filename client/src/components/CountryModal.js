@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import BarChart from "./BarChart.js";
 import LineChart from "./LineChart.js";
-import TweetList from "./TweetList.js";
 
 class CountryModal extends React.Component {
   constructor(props) {
