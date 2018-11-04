@@ -1,35 +1,29 @@
 import React from "react";
 import "./App.css";
-// import Item from "./Item";
 import SearchBar from './components/SearchBar';
 import CountryList from './components/CountryList';
+import CountryModal from './components/CountryModal';
 import it from "./components/Images/it.png"
 import us from "./components/Images/us.png"
 import kr from "./components/Images/kr.png"
 import logo from "./components/Images/PF.png"
-//import "./components/Images"
-
-
-//how to do a reset button
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-
-    // how to get countries without hard coding???
     this.state = {
         countries: [{
           id: 1,
           name: "Usa",
           url: us,
           economicScale: 5
-        }, 
+        },
         {
           id: 2,
           name: "Italy",
           url: it,
           economicScale: 5
-        }, 
+        },
       {
         id: 3,
         name: "Korea",
@@ -66,13 +60,13 @@ class App extends React.Component {
         name: "Usa",
         url: us,
         economicScale: 5
-      }, 
+      },
       {
         id: 2,
         name: "Italy",
         url: it,
         economicScale: 5
-      }, 
+      },
     {
       id: 3,
       name: "Korea",
@@ -100,19 +94,34 @@ class App extends React.Component {
       url: kr,
       economicScale: 7
 
-    }]
+    }],
+    countryToggled: "null",
+    modalToggled: true,
     }
 
     this.handleTermChange = this.handleTermChange.bind(this);
+    this.handleCountryChange = this.handleCountryChange.bind(this);
 
 }
 
-  handleTermChange(term) {  
+  handleTermChange(term) {
       const filtered = this.state.countries.filter((country) => country.name.includes(term.charAt(0).toUpperCase() + term.substr(1).toLowerCase()))
       console.log(term.charAt(0).toUpperCase() + term.substr(1).toLowerCase())
       this.setState({
           filtered: filtered
-      }) 
+      })
+  }
+
+  handleCountryChange = (country) => {
+    this.setState({
+      countryToggled: country
+    })
+  }
+
+  handleModalToggle = (boolean) => {
+    this.setState({
+      modalToggled: boolean
+    })
   }
 
   render() {
@@ -121,14 +130,15 @@ class App extends React.Component {
         <div className="app-header">
         <img src={logo} className="app-logo"
         alt = "logo" />
-        <h2 class="title"> Preflict</h2>
-        <h3 class="caption">A global risk assessment.</h3>
+        <h2 className="title"> Preflict</h2>
+        <h3 className="caption">A global risk assessment.</h3>
         </div>
 
         <SearchBar onTermChange={this.handleTermChange} />
 
-        <CountryList countries={this.state.filtered} />
-    
+        <CountryList state={this.state} onStateChange={this.handleModalToggle} onCountryChange={this.handleCountryChange}/>
+        <CountryModal modalToggled={this.state.modalToggled} countryToggled={this.state.countryToggled} onStateChange={this.handleModalToggle}/>
+
       </div>
 
     );

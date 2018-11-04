@@ -1,14 +1,18 @@
 import React from 'react';
 import CountryItem from './CountryItem';
 
-const CountryList = (props) => {
-  const countryItems = props.countries.map((country) => {
-    return <CountryItem key={country.id} country={country} />
-  });
+class CountryList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.countryItems = this.props.state.countries;
+  }
 
-  return (
-    <div className="country-list">{countryItems}</div>
-  );
-};
-
+  render() {
+    return (
+      <div className="country-list">{this.countryItems.map((country) => {
+        return <CountryItem key={country.id} country={country} onCountryChange={this.props.onCountryChange} onStateChange={this.props.onStateChange}/>})}
+      </div>
+    )
+  }
+}
 export default CountryList;
