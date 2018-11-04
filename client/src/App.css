@@ -34,6 +34,12 @@ h3.caption {
   font-size: 20px;
 }
 
+.countryMetrics {
+  text-align: center;
+  font-size: 14px;
+
+}
+
 .country-item {
   box-shadow: 2px 2px 4px 0 #ccc;
   box-sizing: border-box;

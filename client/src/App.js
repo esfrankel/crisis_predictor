@@ -8,99 +8,79 @@ import us from "./components/Images/us.png"
 import kr from "./components/Images/kr.png"
 import logo from "./components/Images/PF.png"
 //import "./components/Images"
-
+import CVSParse from "./CSVParse.js"
 
 //how to do a reset button
+
+// const fullToSmall = {
+//   Afganistan: 'af',
+//   "United States": "us"
+// };
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     // how to get countries without hard coding???
+
+    // shortcode = fullToSmall[this.state.countries[i].country] == 'af';
+    // png = shortcode + '.png'
+
+    // CVSParse("../src/stocks.csv", (data) => {
+    //   this.setState({countries : data})
+    //   console.log(data)
+    // }) 
+
+    CVSParse("stocks1").then((data) => {
+      this.setState({countries : data, filtered : data})
+    });
+    
+
     this.state = {
-        countries: [{
-          id: 1,
-          name: "Usa",
-          url: us,
-          economicScale: 5
-        }, 
-        {
-          id: 2,
-          name: "Italy",
-          url: it,
-          economicScale: 5
-        }, 
-      {
-        id: 3,
-        name: "Korea",
-        url: kr,
-        economicScale: 7
-
-      },
-      {
-        id: 4,
-        name: "Mexico",
-        url: kr,
-        economicScale: 7
-
-      },
-      {
-        id: 5,
-        name: "Afghanistan",
-        url: kr,
-        economicScale: 7
-
-      },
-      {
-        id: 6,
-        name: "Japan",
-        url: kr,
-        economicScale: 7
-
-      }],
+        countries: [],
+        filtered: []
 
 
 
-      filtered :[{
-        id: 1,
-        name: "Usa",
-        url: us,
-        economicScale: 5
-      }, 
-      {
-        id: 2,
-        name: "Italy",
-        url: it,
-        economicScale: 5
-      }, 
-    {
-      id: 3,
-      name: "Korea",
-      url: kr,
-      economicScale: 7
+    //   filtered :[{
+    //     id: 1,
+    //     name: "Usa",
+    //     url: us,
+    //     economicScale: 5
+    //   }, 
+    //   {
+    //     id: 2,
+    //     name: "Italy",
+    //     url: it,
+    //     economicScale: 5
+    //   }, 
+    // {
+    //   id: 3,
+    //   name: "Korea",
+    //   url: kr,
+    //   economicScale: 7
 
-    },
-    {
-      id: 4,
-      name: "Mexico",
-      url: kr,
-      economicScale: 7
+    // },
+    // {
+    //   id: 4,
+    //   name: "Mexico",
+    //   url: kr,
+    //   economicScale: 7
 
-    },
-    {
-      id: 5,
-      name: "Afghanistan",
-      url: kr,
-      economicScale: 7
+    // },
+    // {
+    //   id: 5,
+    //   name: "Afghanistan",
+    //   url: kr,
+    //   economicScale: 7
 
-    },
-    {
-      id: 6,
-      name: "Japan",
-      url: kr,
-      economicScale: 7
+    // },
+    // {
+    //   id: 6,
+    //   name: "Japan",
+    //   url: kr,
+    //   economicScale: 7
 
-    }]
+    // }]
     }
 
     this.handleTermChange = this.handleTermChange.bind(this);
@@ -108,7 +88,7 @@ class App extends React.Component {
 }
 
   handleTermChange(term) {  
-      const filtered = this.state.countries.filter((country) => country.name.includes(term.charAt(0).toUpperCase() + term.substr(1).toLowerCase()))
+      const filtered = this.state.countries.filter((country) => country.Country.includes(term.charAt(0).toUpperCase() + term.substr(1).toLowerCase()))
       console.log(term.charAt(0).toUpperCase() + term.substr(1).toLowerCase())
       this.setState({
           filtered: filtered
