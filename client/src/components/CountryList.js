@@ -8,8 +8,8 @@ class CountryList extends React.Component {
   render() {
     const countryItems = {};
 
-    for (var i = 0; i < this.props.state.countries.length; i++ ) {
-      var country = this.props.state.countries[i];
+    for (var i = 0; i < this.props.state.filtered.length; i++ ) {
+      var country = this.props.state.filtered[i];
 
 
       if (countryItems[country.Country]) {

@@ -28,6 +28,7 @@ class App extends React.Component {
       this.setState({
           filtered: filtered
       })
+      console.log(this.state.filtered);
   }
 
   handleCountryChange = (country) => {
