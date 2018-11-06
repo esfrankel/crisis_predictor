@@ -10,4 +10,4 @@ Clone the github repository and install npm tools to run the front-end. Install 
 $ npm install
 $ yarn start
 ```
-Peace.io is a collaboration between Stanford students Vivian, Michelle, Eric, and Teja at Cal Hacks 2018 at UC Berkeley. Please feel free to contact us! 
+Peace.io is a collaboration between Stanford students Eric, Vivian, Michelle, and Teja at Cal Hacks 2018 at UC Berkeley. Please feel free to contact us! 
